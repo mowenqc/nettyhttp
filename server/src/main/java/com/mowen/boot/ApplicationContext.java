@@ -32,7 +32,7 @@ public class ApplicationContext {
 
 	public static void loadProperties(String filePath){
 		try {
-			InputStream stream = BootStrap.class.getClassLoader().getResourceAsStream(filePath);
+			InputStream stream = ApplicationContext.class.getClassLoader().getResourceAsStream(filePath);
 			Properties prop = new Properties();
 			prop.load(stream);
 			properties = prop;

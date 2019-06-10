@@ -3,10 +3,6 @@ package com.mowen.boot;
 import com.mowen.server.NettyServer;
 import org.apache.log4j.Logger;
 
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Properties;
-
 /**
  * mowen_parent com.mowen.boot
  * @description:
@@ -19,11 +15,11 @@ public class BootStrap {
 	private static Logger logger = Logger.getLogger(BootStrap.class);
 	public static void main(String[] args) {
 		try {
-			String conf = args[0];
-			if(!conf.endsWith("properties")){
-				conf = "conf/conf.properties";
+			String conf = args != null&& args.length > 0?args[0]:"";
+			if(conf ==  "" || !conf.endsWith("properties")){
+				conf = "conf.properties";
 			}
-			ApplicationContext.loadbean(Arrays.asList(conf));
+			ApplicationContext.loadProperties(conf);
 			NettyServer nettyServer = new NettyServer(ApplicationContext.getPropertiesInt("port"));
 			nettyServer.start();
 		} catch (Exception e) {
